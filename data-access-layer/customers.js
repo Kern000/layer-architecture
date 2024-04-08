@@ -22,4 +22,17 @@ const retrieveAllCustomers = async () => {
     }
 }
 
-module.exports = {retrieveAllCustomers};
+const addNewCustomer = async (firstName, lastName, rating, companyId) => {
+    try {
+        await main();
+        let query = 'INSERT INTO Customers (first_name, last_name, rating, company_id) VALUES (?, ?, ?, ?)';
+        let bindings = [firstName, lastName, rating, companyId];
+        await connection.execute(query, bindings);
+        console.log("added new customer");
+    } catch (error){
+        console.error("Error adding new customer", error);
+    }
+}
+
+
+module.exports = {retrieveAllCustomers, addNewCustomer};

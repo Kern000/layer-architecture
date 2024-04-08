@@ -1,8 +1,13 @@
-const {retrieveAllCustomers} = require("../data-access-layer/customers");
+const {retrieveAllCustomers, addNewCustomer} = require("../data-access-layer/customers");
 
 const getAllCustomers = async () => {
     const customers = await retrieveAllCustomers();
     return customers;
 }
 
-module.exports = {getAllCustomers};
+const serviceAddCustomer = async (firstName, lastName, rating, companyId) => {
+    await addNewCustomer(firstName, lastName, rating, companyId);
+}
+
+
+module.exports = {getAllCustomers, serviceAddCustomer};
