@@ -34,5 +34,35 @@ const addNewCustomer = async (firstName, lastName, rating, companyId) => {
     }
 }
 
+const updateCustomerDAL = async (customer_id, first_Name="",last_Name="", _rating=0, _companyId=0) => {
 
-module.exports = {retrieveAllCustomers, addNewCustomer};
+    await main();
+    try {
+        let queryString = `UPDATE Customers SET`
+        let customerId = customer_id;
+
+        if (first_Name){
+            queryString += ` first_name="${first_Name}",`
+        }
+        if (last_Name){
+            queryString += ` last_name="${last_Name}",`
+        }
+        if (_rating){
+            queryString += ` rating="${_rating}"`
+        }
+        if (_companyId){
+            queryString += ` company_id="${_companyId}"`
+        }
+
+        queryString += ` WHERE customer_id="${customerId}"`
+
+        console.log("processed query string here", queryString);
+        await connection.execute(queryString);
+    } catch(error) {
+        console.error("error", error);
+    }
+}
+
+
+
+module.exports = {retrieveAllCustomers, addNewCustomer, updateCustomerDAL};
